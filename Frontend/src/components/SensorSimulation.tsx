@@ -31,7 +31,7 @@ export function SensorSimulation() {
   const MOVE_STEP = 20; // 한 번에 이동하는 거리 (20m)
   const SCALE_FACTOR = 0.3; // px를 m로 변환하는 배율 (1px = 0.3m)
 
-  const moveIntervalRef = useRef<number | null>(null);
+  const moveIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // 센서 초기화
   useEffect(() => {
@@ -482,7 +482,7 @@ export function SensorSimulation() {
         </div>
         <Slider
           value={[1000 - speed]}
-          onValueChange={(value) =>
+          onValueChange={(value: number[]) =>
             handleSpeedChange([1000 - value[0]])
           }
           max={990}

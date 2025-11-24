@@ -1,11 +1,13 @@
+# 프론트 환경
 
-  # Simulation Display for Sensors (복사)
+* Vite + Typescript 사용
 
-  This is a code bundle for Simulation Display for Sensors (복사). The original project is available at https://www.figma.com/design/IuUCtqEW3pcKn3sRk64L8n/Simulation-Display-for-Sensors--%EB%B3%B5%EC%82%AC-.
+## 커밋 예정(11/19 수정)
 
-  ## Running the code
+* 1차: 기초 웹 구성 및 css, 시뮬레이션 애니메이션 작동 테스트 위주(11/18 반영)
+* 2차: TypeScript Strict Mode 적용 및 Mock API를 활용한 DB 연동 구조 설계(11/20 예정) - 11/24일 반영
 
-  Run `npm i` to install the dependencies.
+  * Service Layer 패턴을 적용하여, 추후 mockApi.ts 파일만 교체하면 즉시 실제 DB와 연동되도록 구현
+  * 데이터 로딩 상태(Skeleton/Loading UI) 및 비동기 데이터 처리 로직 구현 완료
 
-  Run `npm run dev` to start the development server.
-  
+* 3차: 추후 제공될 백엔드 API 연동 및 실데이터 반영 예정

@@ -6,7 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import { Badge } from "./ui/badge";
+
 
 export function SensorDataTable() {
   // 거리에 따른 상태 계산 (절대값 기준)
@@ -95,18 +95,7 @@ export function SensorDataTable() {
     },
   ];
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "위험":
-        return "destructive";
-      case "경고":
-        return "default";
-      case "안전":
-        return "secondary";
-      default:
-        return "outline";
-    }
-  };
+
 
   return (
     <div className="space-y-6">

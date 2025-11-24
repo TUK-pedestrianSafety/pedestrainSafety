@@ -1,61 +1,40 @@
-**Add your own guidelines here**
-<!--
+# TUK-pedestrianSafety AI Guidelines
 
-System Guidelines
+This file contains rules and guidelines for the AI to follow when working on the TUK-pedestrianSafety project.
 
-Use this file to provide the AI with rules and guidelines you want it to follow.
-This template outlines a few examples of things you can add. You can add your own sections and format it to suit your needs
+## Project Context
+This project is a **Pedestrian Safety System** that detects objects and assesses risk levels using sensors.
+- **Goal**: Visualize risk events and sensor health status.
+- **Tech Stack**: Vite + TypeScript, Vanilla CSS.
 
-TIP: More context isn't always better. It can confuse the LLM. Try and add the most important rules you need
+## Domain Rules
 
-# General guidelines
+### Risk Levels & Color Coding
+Represent risk levels with the following colors to ensure intuitive visualization:
+- **Danger (위험)**: Red (e.g., `#FF4D4D` or similar alert color) - High risk, immediate attention.
+- **Warning (경고)**: Orange/Yellow (e.g., `#FFA500`) - Potential risk.
+- **Safety (안전)**: Green (e.g., `#4CAF50`) - Safe state.
 
-Any general rules you want the AI to follow.
-For example:
+### Terminology (Korean)
+Use the following Korean terms for UI display:
+- **Risk**: "위험"
+- **Warning**: "경고"
+- **Safety**: "안전"
+- **Vehicle**: "차량"
+- **Unknown**: "미확인" or "알 수 없음"
 
-* Only use absolute positioning when necessary. Opt for responsive and well structured layouts that use flexbox and grid by default
-* Refactor code as you go to keep code clean
-* Keep file sizes small and put helper functions and components in their own files.
+## General Guidelines
+- **Layouts**: Only use absolute positioning when necessary. Opt for responsive and well-structured layouts that use flexbox and grid by default.
+- **Code Quality**: Refactor code as you go to keep code clean.
+- **File Structure**: Keep file sizes small and put helper functions and components in their own files.
 
---------------
+## Coding Guidelines
 
-# Design system guidelines
-Rules for how the AI should make generations look like your company's design system
+### TypeScript & Architecture
+- **Strict Mode**: Ensure all code is strictly typed.
+- **Service Layer**: Use the Service Layer pattern. Keep data fetching logic in `src/services/`.
+- **Mock API**: Currently using `mockApi.ts`. Ensure code is written such that switching to a real API later is seamless (interface-based).
 
-Additionally, if you select a design system to use in the prompt box, you can reference
-your design system's components, tokens, variables and components.
-For example:
-
-* Use a base font-size of 14px
-* Date formats should always be in the format “Jun 10”
-* The bottom toolbar should only ever have a maximum of 4 items
-* Never use the floating action button with the bottom toolbar
-* Chips should always come in sets of 3 or more
-* Don't use a dropdown if there are 2 or fewer options
-
-You can also create sub sections and add more specific details
-For example:
-
-
-## Button
-The Button component is a fundamental interactive element in our design system, designed to trigger actions or navigate
-users through the application. It provides visual feedback and clear affordances to enhance user experience.
-
-### Usage
-Buttons should be used for important actions that users need to take, such as form submissions, confirming choices,
-or initiating processes. They communicate interactivity and should have clear, action-oriented labels.
-
-### Variants
-* Primary Button
-  * Purpose : Used for the main action in a section or page
-  * Visual Style : Bold, filled with the primary brand color
-  * Usage : One primary button per section to guide users toward the most important action
-* Secondary Button
-  * Purpose : Used for alternative or supporting actions
-  * Visual Style : Outlined with the primary color, transparent background
-  * Usage : Can appear alongside a primary button for less important actions
-* Tertiary Button
-  * Purpose : Used for the least important actions
-  * Visual Style : Text-only with no border, using primary color
-  * Usage : For actions that should be available but not emphasized
--->
+### UI/UX
+- **Visual Hierarchy**: Emphasize "Danger" events visually over "Safety" events.
+- **Responsiveness**: Ensure the dashboard is readable on different screen sizes.
