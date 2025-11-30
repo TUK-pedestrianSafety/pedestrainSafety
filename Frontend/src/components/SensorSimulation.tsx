@@ -19,6 +19,7 @@ interface Sensor {
 }
 
 export function SensorSimulation() {
+
   const [carPosition, setCarPosition] = useState(-100);
   const [sensors, setSensors] = useState<Sensor[]>([]);
   const [isPlaying, setIsPlaying] = useState(false);

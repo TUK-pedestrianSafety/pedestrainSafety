@@ -27,21 +27,8 @@ export function Dashboard() {
           getHealth(),
         ]);
 
-        // Generate synthetic events for faulty sensors
-        const faultyEvents: RiskEvent[] = health
-          .filter(s => s.is_faulty === 1)
-          .map(s => ({
-            event_id: -s.sensor_id, // Negative ID to distinguish from DB events
-            sensor_id: s.sensor_id,
-            object_type: "System",
-            distance_m: 0,
-            risk_label: "고장",
-            detected_at: s.updated_at
-          }));
-
-        // Combine real events and faulty events
-        const allEvents = [...events, ...faultyEvents];
-        const sortedEvents = allEvents.sort((a, b) => a.sensor_id - b.sensor_id);
+        const sortedEvents = events
+          .sort((a, b) => a.sensor_id - b.sensor_id);
 
         setRiskEvents(sortedEvents);
         setSensorHealthRegistry(health);
@@ -63,8 +50,7 @@ export function Dashboard() {
   const faultySensors = sensorHealthRegistry.filter((s) => s.is_faulty === 1).length;
   const activeSensors = totalSensors - faultySensors;
 
-  const recentHighRisks = riskEvents.filter(e => e.risk_label === "고장").length;
-  const currentRiskLevel = recentHighRisks > 0 ? "CRITICAL" : "NORMAL";
+
 
   const formatTime = (dateString: string | null) => {
     if (!dateString) return "-";
@@ -130,14 +116,32 @@ export function Dashboard() {
             <CardTitle className="text-sm font-medium text-gray-200">
               위험 분석
             </CardTitle>
-            <ShieldAlert className={`h-4 w-4 ${currentRiskLevel === 'CRITICAL' ? 'text-red-500' : 'text-blue-500'}`} />
+            <ShieldAlert
+              className="h-4 w-4"
+              style={{
+                color: faultySensors >= 5 ? "#dc2626" : // red-600
+                  faultySensors >= 3 ? "#f97316" : // orange-500
+                    faultySensors > 0 ? "#eab308" : // yellow-500
+                      "#22c55e" // green-500
+              }}
+            />
           </CardHeader>
           <CardContent>
-            <div className={`text-2xl font-bold ${currentRiskLevel === 'CRITICAL' ? 'text-red-400' : 'text-blue-400'}`}>
-              {currentRiskLevel === 'CRITICAL' ? '위험' : '정상'}
+            <div
+              className="text-2xl font-bold"
+              style={{
+                color: faultySensors >= 5 ? "#ef4444" : // red-500
+                  faultySensors >= 3 ? "#fb923c" : // orange-400
+                    faultySensors > 0 ? "#facc15" : // yellow-400
+                      "#4ade80" // green-400
+              }}
+            >
+              {faultySensors >= 5 ? "고위험" :
+                faultySensors >= 3 ? "위험" :
+                  faultySensors > 0 ? "경고" : "정상"}
             </div>
             <p className="text-xs text-gray-400 mt-1">
-              최근 {recentHighRisks}건의 고위험 이벤트 감지
+              최근 {faultySensors}건의 오류 발생
             </p>
           </CardContent>
         </Card>
