@@ -72,9 +72,7 @@ router.post("/ping", (req, res) => {
     return res.status(400).json({ error: "sensor_id 필요" });
   }
 
-
-
-  const isTimeout = Math.random() < 0.2; // 20% 확률로 timeout
+  const isTimeout = Math.random() < 0.6; // 60% 확률로 timeout
   const responseMs = isTimeout ? null : Math.floor(Math.random() * 80) + 20;
 
   // ping 로그 기록 수행
